@@ -100,7 +100,7 @@ const progressSummary = async (req, res) => {
     const completedTopicIds = await UserSubjectProgress.aggregate([
       { $match: { userId: new mongoose.Types.ObjectId(userId) } },
       { $unwind: "$topics" },
-      { $match: { "topics.status": "completed" } },
+      { $match: { "topics.status": "done" } },
       { $group: { _id: "$topics.topicId" } }
     ]);
 

@@ -6,7 +6,7 @@ const JWT_EXPIRES_IN = '7d';
 
 
   const registerUser= async (req, res) => {
-    const { name, email, password } = req.body;
+    const {name,  email, password } = req.body;
 
     try {
       const existingUser = await User.findOne({ email });
@@ -14,12 +14,12 @@ const JWT_EXPIRES_IN = '7d';
 
       const passwordHash = await hashPassword(password);
 
-      const user = new User({ name, email, passwordHash });
+      const user = new User({name, email, passwordHash });
       await user.save();
 
-      res.status(201).json({ message: 'User created successfully', user });
+      res.status(201).json({ message: 'User created successfully', user, status:201 });
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      res.status(500).json({ error: err.message,status:500 });
     }
   }
 
